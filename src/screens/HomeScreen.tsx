@@ -1,12 +1,13 @@
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
 import {DownArrowIcon} from '../Icons';
 import {COLOR, FONTS, FSIZE} from '../theme/appTheme';
 import DashboardMonth from '../components/Home/DashboardMonth';
+import DashboardTaxes from '../components/Home/DashboardTaxes';
 
 const HomeScreen = () => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.userName}>
         <Text style={styles.userNameText}>Adolfo{'\n'}Fernández</Text>
         <View style={styles.month}>
@@ -15,7 +16,9 @@ const HomeScreen = () => {
         </View>
       </View>
       <DashboardMonth />
-    </View>
+        <Text style={styles.sectionTitleText}>Impuestos del mes</Text>
+      <DashboardTaxes />
+    </ScrollView>
   );
 };
 
@@ -50,4 +53,10 @@ const styles = StyleSheet.create({
     fontSize: FSIZE.md,
     marginRight: 10,
   },
+  sectionTitleText: {
+    fontFamily: FONTS.medium,
+    color: 'black',
+    fontSize: FSIZE.md1,
+    marginTop: 24
+  }
 });

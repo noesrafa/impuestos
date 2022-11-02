@@ -21,8 +21,8 @@ const LogoIcon = (props: any) => (
 
 const BellIcon = (props: any) => (
   <Svg
-    width="32"
-    height="32"
+    width="28"
+    height="28"
     viewBox="0 0 25 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg">
@@ -43,8 +43,8 @@ const BellIcon = (props: any) => (
 
 const UserIcon = (props: any) => (
   <Svg
-    width="32"
-    height="32"
+    width="28"
+    height="28"
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg">
