@@ -1,5 +1,6 @@
 package com.impuestos;
 
+
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
@@ -12,6 +13,8 @@ import com.facebook.soloader.SoLoader;
 import com.impuestos.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -27,7 +30,6 @@ public class MainApplication extends Application implements ReactApplication {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
           return packages;
         }
 

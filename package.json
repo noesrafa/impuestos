@@ -13,6 +13,7 @@
     "react": "18.1.0",
     "react-native": "0.70.4",
     "react-native-donut-chart": "^0.0.16",
+    "react-native-splash-screen": "^3.3.0",
     "react-native-svg": "^13.4.0"
   },
   "devDependencies": {
