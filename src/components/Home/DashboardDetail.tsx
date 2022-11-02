@@ -3,6 +3,7 @@ import React from 'react';
 import {COLOR, FONTS, FSIZE} from '../../theme/appTheme';
 import { AngleArrowIcon } from '../../Icons';
 
+
 interface Props {
   percent: number;
   description: string;
@@ -12,7 +13,7 @@ interface Props {
 
 const DashboardDetail = ({percent, description, value, positive}: Props) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} >
       <View
         style={[
           styles.percent,

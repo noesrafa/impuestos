@@ -4,9 +4,14 @@ import {DownArrowIcon} from '../Icons';
 import {COLOR, FONTS, FSIZE} from '../theme/appTheme';
 import DashboardMonth from '../components/Home/DashboardMonth';
 import DashboardTaxes from '../components/Home/DashboardTaxes';
+import Header from '../components/Header';
+
+
 
 const HomeScreen = () => {
   return (
+    <>
+    <Header />
     <ScrollView style={styles.container}>
       <View style={styles.userName}>
         <Text style={styles.userNameText}>Adolfo{'\n'}Fernández</Text>
@@ -19,6 +24,7 @@ const HomeScreen = () => {
         <Text style={styles.sectionTitleText}>Impuestos del mes</Text>
       <DashboardTaxes />
     </ScrollView>
+    </>
   );
 };
 

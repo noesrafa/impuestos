@@ -2,7 +2,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {BellIcon, LogoIcon, UserIcon} from '../Icons';
-import LinearGradient from 'react-native-linear-gradient'
 
 const Header = () => {
   return (
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 10,
+    paddingTop: 50,
     paddingBottom: 30,
     paddingHorizontal: 26,
     alignItems: 'center'
