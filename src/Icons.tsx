@@ -10,11 +10,11 @@ const LogoIcon = (props: any) => (
     xmlns="http://www.w3.org/2000/svg">
     <Path
       d="M30.9999 0H16.8027L11.071 19.9323H25.2681L30.9999 0Z"
-      fill="#29A790"
+      fill="#00B897"
     />
     <Path
       d="M0 11.4873H7.34111L11.0711 19.9323H3.73L0 11.4873Z"
-      fill="#29A790"
+      fill="#00B897"
     />
   </Svg>
 );
@@ -213,4 +213,29 @@ const AngleArrowIcon = (props: any) => (
   </Svg>
 );
 
-export {LogoIcon, BellIcon, UserIcon, DownArrowIcon, AboutIcon, AngleArrowIcon, SplashLogoIcon};
+const RightArrowIcon = (props: any) => (
+  <Svg
+    width="7"
+    height="12"
+    viewBox="0 0 7 12"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <Path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M0.410786 11.5893C0.085349 11.2638 0.085349 10.7362 0.410786 10.4108L4.82153 6.00001L0.410785 1.58927C0.0853482 1.26383 0.0853481 0.736193 0.410785 0.410757C0.736222 0.0853191 1.26386 0.0853191 1.5893 0.410757L6.5893 5.41076C6.91473 5.73619 6.91473 6.26383 6.5893 6.58927L1.5893 11.5893C1.26386 11.9147 0.736223 11.9147 0.410786 11.5893Z"
+      fill="#84849A"
+    />
+  </Svg>
+);
+
+export {
+  LogoIcon,
+  BellIcon,
+  UserIcon,
+  DownArrowIcon,
+  AboutIcon,
+  AngleArrowIcon,
+  SplashLogoIcon,
+  RightArrowIcon
+};

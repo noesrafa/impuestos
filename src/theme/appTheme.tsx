@@ -23,6 +23,7 @@ export const FSIZE = {
 
 export const COLOR = {
     background: "#F1F3FA",
+    principal: "#00B897",
     black: '#000',
     white: 'white',
     link: "#319CFF",

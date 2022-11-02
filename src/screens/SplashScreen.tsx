@@ -6,7 +6,7 @@ import { SplashLogoIcon } from '../Icons'
 const SplashScreen = ({navigation}) => {
  React.useEffect(() => {
     setTimeout(() => {
-        navigation.replace('HomeScreen')
+        navigation.replace('AuthScreen')
     }, 1500)
  }, [])
     
@@ -26,7 +26,7 @@ export default SplashScreen
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#29A790",
+        backgroundColor: "#00B897",
         flex: 1,
         alignItems: "center",
         justifyContent: "center"
