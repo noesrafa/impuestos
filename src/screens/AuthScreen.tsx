@@ -5,28 +5,71 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {LogoIcon, RightArrowIcon} from '../Icons';
 import {COLOR, FONTS, FSIZE} from '../theme/appTheme';
+// Apollo
+import {gql, useMutation, useQuery} from '@apollo/client';
+// Local Storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {ObtenerAnalisis} from '../Queries';
 
 const AuthScreen = ({navigation}) => {
-    const [code, setCode] = useState('');
-    const [alert, setAlert] = useState(false);
-    const [alertMessage, setAlertMessage] = useState('');
+  const [code, setCode] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
+  const [loadingData, setLoadingData] = useState(false);
 
-  const triggerSearch = () => {
-    if (code !== '') {
-      console.log('codigo', code);
-      navigation.replace('HomeScreen');
+  const AUTH_TOKEN = gql`
+    mutation Mutation($input: AuthInput) {
+      authUser(input: $input) {
+        token
+      }
+    }
+  `;
+
+  const [autenticarToken] = useMutation(AUTH_TOKEN);
+
+  const {data, loading, error} = useQuery(ObtenerAnalisis);
+
+  function fetchData() {
+    setLoadingData(true);
+
+    if (!loading) {
+      setTimeout(() => {
+        navigation.replace('HomeScreen', {
+          data,
+        });
+      }, 100);
+    }
+  }
+
+  const triggerSearch = async () => {
+    if (code.length > 9) {
+      try {
+        const {data} = await autenticarToken({
+          variables: {
+            input: {
+              token: code,
+            },
+          },
+        });
+        const {token} = data.authUser;
+        await AsyncStorage.setItem('token', token);
+        fetchData();
+      } catch (error) {
+        showAlert(error.message);
+      }
+
+      // navigation.replace('HomeScreen');
     } else {
-      showAlert("Este campo es obligatorio.");
+      showAlert('Este campo es obligatorio.');
     }
   };
 
-  function showAlert(message:string) {
-    setAlertMessage(message)
+  function showAlert(message: string) {
+    setAlertMessage(message);
     setTimeout(() => {
-        setAlertMessage('')
+      setAlertMessage('');
     }, 3000);
   }
 
@@ -52,11 +95,11 @@ const AuthScreen = ({navigation}) => {
           style={[
             styles.nextText,
             {
-              backgroundColor: code !== '' ? COLOR.principal : '#E0E3ED',
-              color: code !== '' ? 'white' : COLOR.gray200,
+              backgroundColor: code.length > 9 ? COLOR.principal : '#E0E3ED',
+              color: code.length > 9 ? 'white' : COLOR.gray200,
             },
           ]}>
-          Continuar
+          {loadingData ? 'Cargando...' : 'Continuar'}
         </Text>
       </TouchableOpacity>
     </View>

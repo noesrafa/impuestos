@@ -6,9 +6,11 @@ import DashboardMonth from '../components/Home/DashboardMonth';
 import DashboardTaxes from '../components/Home/DashboardTaxes';
 import Header from '../components/Header';
 
+const HomeScreen = ({route, navigation}) => {
 
-
-const HomeScreen = () => {
+  const { data } = route.params;
+  const { mes } = data.obtenerAnalisis[0]
+  
   return (
     <>
     <Header />
@@ -16,7 +18,7 @@ const HomeScreen = () => {
       <View style={styles.userName}>
         <Text style={styles.userNameText}>Adolfo{'\n'}Fernández</Text>
         <View style={styles.month}>
-          <Text style={styles.monthText}>Sep 2022</Text>
+          <Text style={styles.monthText}>{mes} 2022</Text>
           <DownArrowIcon />
         </View>
       </View>

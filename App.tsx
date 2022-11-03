@@ -21,16 +21,16 @@ const App = () => {
   };
 
   return (
-    <NavigationContainer theme={navTheme}>
-      <View style={styles.container}>
-        <StatusBar
-          translucent
-          backgroundColor={'transparent'}
-          barStyle={'dark-content'}
-        />
-        <StackNavigator />
-      </View>
-    </NavigationContainer>
+      <NavigationContainer theme={navTheme}>
+        <View style={styles.container}>
+          <StatusBar
+            translucent
+            backgroundColor={'transparent'}
+            barStyle={'dark-content'}
+          />
+          <StackNavigator />
+        </View>
+      </NavigationContainer>
   );
 };
 
