@@ -1,8 +1,7 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {COLOR, FONTS, FSIZE} from '../../theme/appTheme';
-import { AngleArrowIcon } from '../../Icons';
-
+import {AngleArrowIcon} from '../../Icons';
 
 interface Props {
   percent: number;
@@ -13,7 +12,7 @@ interface Props {
 
 const DashboardDetail = ({percent, description, value, positive}: Props) => {
   return (
-    <TouchableOpacity style={styles.container} >
+    <View style={styles.container}>
       <View
         style={[
           styles.percent,
@@ -32,12 +31,14 @@ const DashboardDetail = ({percent, description, value, positive}: Props) => {
         <AngleArrowIcon />
       </View>
       <View style={styles.totalValue}>
-        <Text style={styles.totalValueNumber}>${value}</Text>
+        <Text style={styles.totalValueNumber}>
+          ${percent > 0 ? value[0] : value[0].toString().substring(1)}
+        </Text>
         <Text style={[styles.totalValueNumber, {color: COLOR.gray200}]}>
-          .81
+          .{value[1]}
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
   },
   description: {
     flexDirection: 'row',
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 10,
   },
   descriptionText: {

@@ -4,7 +4,7 @@ import {setContext} from '@apollo/client/link/context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const httpLink = createHttpLink({
-  uri: 'http://192.168.0.9:4000/',
+  uri: 'https://floating-brook-86102.herokuapp.com/',
 });
 
 const authLink = setContext(async (_, {headers}) => {

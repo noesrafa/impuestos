@@ -4,6 +4,7 @@ export const ObtenerAnalisis = gql`
     obtenerAnalisis {
       id
       mes
+      year
       ingresosTotales
       gastosTotales
       isr

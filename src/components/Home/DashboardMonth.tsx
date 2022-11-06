@@ -1,38 +1,79 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Modal,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
+import React, {useState} from 'react';
 import {AboutIcon} from '../../Icons';
 import {COLOR, FONTS, FSIZE} from '../../theme/appTheme';
 import DashboardDetail from './DashboardDetail';
+import AboutModal from '../AboutModal';
 
-const DashboardMonth = () => {
+const DashboardMonth = ({
+  ingresosTotales,
+  gastosTotales,
+  utilidad,
+  gastosPercent,
+  utilidadPercent,
+  setModalVisible,
+  modalVisible,
+}) => {
+  const detailStatus = utilidadPercent > 0;
+  const [aboutModal, setAboutModal] = useState(false)
+
   return (
-    <View style={styles.container}>
-      <View style={styles.totalRevenue}>
-        <Text style={styles.totalRevenueText}>Ingresos Totales</Text>
-        <AboutIcon />
-      </View>
-      <View style={styles.totalRevenueValue}>
-        <Text style={styles.totalRevenueValueNumber}>$199,154</Text>
-        <Text style={[styles.totalRevenueValueNumber, {color: COLOR.gray200}]}>
-          .81
-        </Text>
-      </View>
-      <View style={styles.detailButton}>
-        <DashboardDetail
-          percent={99}
-          description={'Gastos Totales'}
-          value={'198,822'}
-          positive={false}
+    <>
+      <View style={styles.container}>
+        <AboutModal
+          aboutModal={aboutModal}
+          setAboutModal={setAboutModal}
+          setModalVisible={setModalVisible}
+          modalVisible={modalVisible}
+          title="Ingresos Totales"
+          description={
+            'Es la suma de todos los ingresos que obtuviste durante el mes, no se consideran los gastos y en base a esto se calculan tus impuestos.'
+          }
+          btnText="Entiendo"
         />
-        <View style={styles.separator}/>
-        <DashboardDetail
-          percent={1}
-          description={'Utilidad'}
-          value={'2,332'}
-          positive={true}
-        />
+
+          <TouchableOpacity onPress={() => {
+            setModalVisible(true)
+            setAboutModal(true)
+          }}>
+        <View style={styles.totalRevenue}>
+          <Text style={styles.totalRevenueText}>Ingresos Totales</Text>
+            <AboutIcon />
+        </View>
+          </TouchableOpacity>
+        <View style={styles.totalRevenueValue}>
+          <Text style={styles.totalRevenueValueNumber}>
+            ${ingresosTotales[0]}
+          </Text>
+          <Text
+            style={[styles.totalRevenueValueNumber, {color: COLOR.gray200}]}>
+            .{ingresosTotales[1]}
+          </Text>
+        </View>
+        <View style={styles.detailButton}>
+          <DashboardDetail
+            percent={gastosPercent}
+            description={'Gastos Totales'}
+            value={gastosTotales}
+            positive={false}
+          />
+          <View style={styles.separator} />
+          <DashboardDetail
+            percent={utilidadPercent}
+            description={utilidadPercent > 0 ? 'Utilidad' : 'Perdida'}
+            value={utilidad}
+            positive={detailStatus}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 
@@ -49,7 +90,7 @@ const styles = StyleSheet.create({
   totalRevenue: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 6,
+    paddingBottom: 6,
     marginLeft: 10,
   },
   totalRevenueText: {
@@ -73,5 +114,5 @@ const styles = StyleSheet.create({
   },
   separator: {
     width: 10,
-  }
+  },
 });

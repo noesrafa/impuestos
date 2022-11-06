@@ -1,43 +1,97 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {Donut} from 'react-native-donut-chart';
 import {COLOR, FONTS, FSIZE} from '../../theme/appTheme';
 import {AboutIcon} from '../../Icons';
+import TaxesModal from '../TaxesModal';
 
-const data = [
-  {
-    value: 5433.24,
-    color: '#0F52FF',
-    title: 'ISR',
-  },
-  {
-    value: 25533.15,
-    color: '#D9E3FF',
-    title: 'IVA',
-  },
-];
+const DashboardTaxes = ({
+  isr,
+  iva,
+  isrRetenido,
+  ivaRetenido,
+  impuestos,
+  setModalVisible,
+  modalVisible,
+}) => {
+  const [gap, setGap] = useState(12);
+  const [taxesModal, setTaxesModal] = useState(false);
 
-const DashboardTaxes = () => {
+  let data = [
+    {
+      value: isr,
+      color: '#4576F6',
+      title: 'ISR',
+    },
+    {
+      value: iva,
+      color: '#00B897',
+      title: 'IVA',
+    },
+  ];
+
+  useEffect(() => {
+    if (isrRetenido !== 0 && ivaRetenido !== 0) {
+      setGap(6);
+    } else if (isrRetenido !== 0) {
+      setGap(8);
+    } else if (ivaRetenido !== 0) {
+      setGap(8);
+    }
+  }, []);
+
+  if (ivaRetenido !== 0) {
+    data.push({
+      value: ivaRetenido,
+      color: '#C4EFE7',
+      title: 'IVA Retenido',
+    });
+  }
+  if (isrRetenido !== 0) {
+    data.push({
+      value: isrRetenido,
+      color: '#D9E3FF',
+      title: 'ISR Retenido',
+    });
+  }
+
   return (
     <View style={styles.container}>
+      <TaxesModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        setTaxesModal={setTaxesModal}
+        taxesModal={taxesModal}
+        title={'Impuestos del Mes'}
+        description={'Es la cantidad de impuestos que tienes que pagar antes del 17 de cada mes para completar tu declaración.'}
+        btnText={'Entiendo'}
+      />
       <View>
         <Donut
           data={data}
           strokeWidth={16}
           radius={110}
-          gap={12}
+          gap={gap}
           bgStrokeColor={'white'}
         />
         <View style={styles.taxes}>
-          <View style={styles.title}>
+          <TouchableOpacity
+            style={styles.title}
+            onPress={() => {
+              setModalVisible(true);
+              setTaxesModal(true);
+            }}>
             <Text style={styles.titleText}>Impuestos</Text>
             <AboutIcon />
-          </View>
+          </TouchableOpacity>
           <View style={styles.value}>
-            <Text style={styles.valueNumber}>$30,034</Text>
-            <Text style={[styles.valueNumber, {color: COLOR.gray200}]}>
-              .53
-            </Text>
+            <Text style={styles.valueNumber}>${impuestos[0]}</Text>
           </View>
         </View>
       </View>
@@ -66,7 +120,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 16,
     alignItems: 'center',
-    marginBottom: 26
+    marginBottom: 26,
   },
   taxes: {
     alignItems: 'center',
@@ -97,7 +151,7 @@ const styles = StyleSheet.create({
   },
   valuesWrapper: {
     flexDirection: 'row',
-    alignItems: "center",
+    alignItems: 'center',
     marginRight: 30,
   },
   colorDot: {
@@ -115,10 +169,10 @@ const styles = StyleSheet.create({
     fontSize: FSIZE.md,
     fontFamily: FONTS.medium,
     color: COLOR.gray300,
-    textTransform: 'uppercase',
+    // textTransform: 'uppercase',
   },
   scrollValue: {
-    maxWidth: "70%",
-    paddingVertical: 20
-  }
+    maxWidth: '80%',
+    paddingVertical: 20,
+  },
 });

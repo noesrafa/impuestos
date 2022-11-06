@@ -9,10 +9,10 @@ import React, {useState} from 'react';
 import {LogoIcon, RightArrowIcon} from '../Icons';
 import {COLOR, FONTS, FSIZE} from '../theme/appTheme';
 // Apollo
-import {gql, useMutation, useQuery} from '@apollo/client';
+import {gql, useMutation} from '@apollo/client';
 // Local Storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ObtenerAnalisis} from '../Queries';
+
 
 const AuthScreen = ({navigation}) => {
   const [code, setCode] = useState('');
@@ -29,18 +29,11 @@ const AuthScreen = ({navigation}) => {
 
   const [autenticarToken] = useMutation(AUTH_TOKEN);
 
-  const {data, loading, error} = useQuery(ObtenerAnalisis);
-
   function fetchData() {
     setLoadingData(true);
 
-    if (!loading) {
-      setTimeout(() => {
-        navigation.replace('HomeScreen', {
-          data,
-        });
-      }, 100);
-    }
+    navigation.replace('ApolloLoader');
+
   }
 
   const triggerSearch = async () => {
